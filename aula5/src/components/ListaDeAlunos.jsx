@@ -1,43 +1,36 @@
-
 import React, { useEffect, useState } from 'react'
 
 const ListaDeAlunos = () => {
+
     const [alunos, setAlunos] = useState([])
 
-    //  Trabalhando com requisição GET
     useEffect(() => {
         async function fetchData() {
-
-            const res = await fetch("http://localhost:3000/alunos")
-
-            const data = await res.json() 
-
+            const response = await fetch("http://localhost:3000/alunos")
+            const data = await response.json()
             setAlunos(data)
         }
         fetchData()
     }, [])
 
+
   return (
     <div>
-        <table border='1px'>            
+        <table border= '1px'>
             <thead>
-                    <th>Matricula</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Curso</th>
+                <th>Matricula:</th>
+                <th>Nome</th>
+                <th>Email</th>
             </thead>
-
             <tbody>
-                {
-                    alunos.map((aluno) => (
+                {alunos.map((aluno) => (
                     <tr key={aluno.id}>
                         <td>{aluno.id}</td>
                         <td>{aluno.nome}</td>
                         <td>{aluno.email}</td>
-                        <td>{aluno.curso}</td>
+
                     </tr>
-                    ))
-                }   
+                ))}
             </tbody>
         </table>
     </div>
